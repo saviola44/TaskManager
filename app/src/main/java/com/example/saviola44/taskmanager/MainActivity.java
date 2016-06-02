@@ -1,5 +1,6 @@
 package com.example.saviola44.taskmanager;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -20,8 +21,22 @@ public class MainActivity extends AppCompatActivity {
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getApplicationContext(), EditTaskActivity.class);
+                intent.putExtra(EditTaskActivity.TASK_MODE, EditTaskActivity.ADD_TASK);
+                startActivityForResult(intent,EditTaskActivity.ADD_TASK);
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(resultCode == RESULT_OK){
+            if(requestCode==EditTaskActivity.ADD_TASK){
+
+            }
+            else if(resultCode == EditTaskActivity.EDIT_TASK){
+
+            }
+        }
     }
 }

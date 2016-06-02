@@ -24,7 +24,7 @@ public class EditTaskActivity extends AppCompatActivity {
     public static final int ADD_TASK = 1;
     public static final int EDIT_TASK = 2;
     public static final String TASK_MODE = "mode";
-    int mode = 1;
+    int mode;
 
 
 
@@ -40,6 +40,21 @@ public class EditTaskActivity extends AppCompatActivity {
         saveBtn = (Button) findViewById(R.id.saveBtn);
         changeTimeIV = (ImageView) findViewById(R.id.change_time_end);
 
+        mode = getIntent().getIntExtra(TASK_MODE, 1);
+        initializeLabels();
+        
 
     }
+
+    public void initializeLabels(){
+        if(mode == 1){
+            headerLabel.setText(R.string.add_task_label);
+            saveBtn.setText(R.string.add_button_label);
+        }
+        else if(mode == 2){
+            headerLabel.setText(R.string.edit_task_label);
+            saveBtn.setText(R.string.save_button_label);
+        }
+    }
+
 }
