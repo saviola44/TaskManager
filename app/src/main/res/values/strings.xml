@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">TaskManager</string>
+    <string name="add_button_label">Dodaj</string>
+    <string name="add_task_label">Dodaj zadanie</string>
+    <string name="title_label">Tytuł</string>
+    <string name="load_icon">wczytaj ikonę</string>
+    <string name="desciption_label">Opis</string>
+</resources>
