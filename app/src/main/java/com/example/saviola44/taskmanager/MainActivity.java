@@ -6,8 +6,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -20,11 +22,11 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 
 import com.example.saviola44.taskmanager.Model.Task;
-import com.google.common.collect.Collections2;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     ListView taskList;
     Button addBtn;
+    Spinner sortMethSpin;
     ArrayList<Task> tasks;
     TaskAdapter adapter;
     public static int compTag = 1;
@@ -35,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Task.findById(Task.class, 1); //wywolanie aby ruszył SugarOrm do pracy po uruchomieniu
+        sortMethSpin = (Spinner) findViewById(R.id.sorted_comp_spinner);
         taskList = (ListView) findViewById(R.id.task_list_id);
         addBtn = (Button) findViewById(R.id.add_btn);
         if(compTag==1){
@@ -75,6 +78,15 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(intent, EditTaskActivity.EDIT_TASK);
             }
         });
+        sortMethSpin.setOnItemSelectedListener(this);
+        List<String> compStr = new ArrayList<>();
+        compStr.add("Koniec zadania");
+        compStr.add("Data utworzenia");
+        compStr.add("Tytuł");
+        ArrayAdapter<String> spinAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, compStr);
+        spinAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sortMethSpin.setAdapter(spinAdapter);
+
 
         //ParseTaskJSON parse = new ParseTaskJSONImpl(getApplicationContext());
         //parse.writeTasks(tasks, "elo");
@@ -85,9 +97,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(resultCode == RESULT_OK){
             if(requestCode==EditTaskActivity.ADD_TASK){
-                Log.d("elo", "jrdtem");
                 Task task = data.getParcelableExtra("task");
-                Log.d("elo", "jrdtem  " + task.getTitle());
 
                 tasks.add(task);
                 Collections.sort(tasks, comparator);
@@ -130,5 +140,31 @@ public class MainActivity extends AppCompatActivity {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putParcelableArrayList("tasks", tasks);
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+        switch(position){
+            case 0:{
+                comparator = new TimeEndComparator();
+                break;
+            }
+            case 1: {
+                comparator = new NewestTask();
+                break;
+            }
+            case 2:{
+                comparator = new AlphabeticalOrder();
+                break;
+            }
+        }
+        Collections.sort(tasks, comparator);
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }

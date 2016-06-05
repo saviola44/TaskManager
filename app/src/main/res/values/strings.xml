@@ -11,4 +11,5 @@
     <string name="desciption_label">Opis</string>
     <string name="title_alert">Tytuł nie moze byc pusty</string>
     <string name="confirm_deletion">Czy napewno chcesz usunąć wybrane zadanie?</string>
+    <string name="sort_method_label">Sortuj wg:</string>
 </resources>
