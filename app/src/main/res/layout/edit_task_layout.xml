@@ -1,82 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="#938D918D">
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginLeft="@dimen/activity_horizontal_margin"
-    android:layout_marginRight="@dimen/activity_horizontal_margin">
+    android:layout_height="match_parent">
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:id="@+id/header"
         android:text="@string/add_task_label"
         android:layout_alignParentTop="true"
         android:textSize="@dimen/big_text_size"
+        android:background="#FF323633"
+        android:textStyle="bold"
         android:gravity="center"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
         android:layout_marginBottom="@dimen/activity_vertical_margin"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/title_label"
         android:id="@+id/tl"
+        android:layout_marginLeft="5dp"
         android:layout_below="@id/header"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:id="@+id/edit_title_ET"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:layout_below="@id/tl"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/dl"
         android:text="@string/desciption_label"
+        android:layout_marginLeft="5dp"
         android:layout_below="@id/edit_title_ET"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:id="@+id/descriptionET"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:layout_below="@id/dl"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:id="@+id/iconLL"
-        android:layout_below="@id/descriptionET"
-        android:orientation="horizontal">
-        <Button
-
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:layout_weight="2"
-
-            android:layout_gravity="center"
-            android:text="@string/load_icon"
-            android:id="@+id/loadIcon"
-            />
-        <ImageView
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/iconTask"
-
-            android:layout_gravity="center"
-            android:src="@android:drawable/ic_menu_gallery"
-            />
-    </LinearLayout>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/iconLL"
+        android:id="@+id/il"
+
+        android:text="Wczytaj Ikone"
+        android:layout_marginLeft="5dp"
+        android:layout_below="@id/descriptionET"/>
+        <ImageView
+
+            android:layout_height="50dp"
+            android:layout_width="50dp"
+            android:layout_below="@id/il"
+            android:src="@drawable/load_image"
+            android:id="@+id/loadIcon"
+            />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:id="@+id/iconTask"
+            android:layout_below="@id/il"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:src="@android:drawable/ic_menu_gallery"
+            />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/loadIcon"
         android:id="@+id/t_end_TV"
+        android:layout_marginLeft="5dp"
+        android:layout_marginBottom="5dp"
         android:text="Czas realizacji zadania"
         />
+
     <ImageView
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_below="@id/t_end_TV"
+        android:layout_marginLeft="5dp"
         android:id="@+id/change_time_end"
-        android:src="@android:drawable/ic_menu_edit"
+        android:src="@drawable/overtime"
         android:layout_alignParentLeft="true"/>
     <EditText
         android:layout_width="match_parent"
@@ -86,13 +96,16 @@
         android:layout_toRightOf="@id/change_time_end"
         android:layout_below="@id/t_end_TV"
         android:layout_marginLeft="15dp"
-        android:editable="false"/>
+        android:layout_marginRight="5dp"
+        android:inputType="none"/>
     <Button
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/saveBtn"
         android:text="@string/add_task_label"
-        android:layout_below="@id/change_time_end"/>
+        style="@style/my_button_style"
+        android:layout_below="@id/change_time_end"
+        android:layout_centerHorizontal="true" />
 
 
 

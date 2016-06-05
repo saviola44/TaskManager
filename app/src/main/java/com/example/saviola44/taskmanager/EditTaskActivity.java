@@ -29,7 +29,7 @@ public class EditTaskActivity extends AppCompatActivity implements DatePickerDia
     EditText editTitle;
     EditText editDescription;
     EditText changeTimeEnd;
-    Button loadIconBtn;
+    ImageView loadIconIV;
     Button saveBtn;
     ImageView changeTimeIV;
     ImageView icontask;
@@ -57,7 +57,7 @@ public class EditTaskActivity extends AppCompatActivity implements DatePickerDia
         editTitle = (EditText) findViewById(R.id.edit_title_ET);
         editDescription = (EditText) findViewById(R.id.descriptionET);
         changeTimeEnd = (EditText) findViewById(R.id.time_end_ET);
-        loadIconBtn = (Button) findViewById(R.id.loadIcon);
+        loadIconIV = (ImageView) findViewById(R.id.loadIcon);
         saveBtn = (Button) findViewById(R.id.saveBtn);
         changeTimeIV = (ImageView) findViewById(R.id.change_time_end);
         icontask = (ImageView) findViewById(R.id.iconTask);
@@ -75,7 +75,7 @@ public class EditTaskActivity extends AppCompatActivity implements DatePickerDia
         initializeLabels();
 
 
-        loadIconBtn.setOnClickListener(new View.OnClickListener() {
+        loadIconIV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
