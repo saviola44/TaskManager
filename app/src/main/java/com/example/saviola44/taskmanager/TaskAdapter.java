@@ -21,16 +21,14 @@ import com.example.saviola44.taskmanager.Model.Task;
 /**
  * Created by saviola44 on 03.06.16.
  */
-public class TaskAdapter extends ArrayAdapter implements DeleteDialog.DeleteTask{
+public class TaskAdapter extends ArrayAdapter{
     ArrayList<Task> tasks;
 
     AppCompatActivity context;
-    DeleteDialog dialog;
     public TaskAdapter(AppCompatActivity context, int resource, ArrayList<Task> tasks) {
         super(context, resource);
         this.tasks = tasks;
         this.context = context;
-        dialog = new DeleteDialog();
     }
     @Override
     public Object getItem(int position) {
@@ -82,10 +80,6 @@ public class TaskAdapter extends ArrayAdapter implements DeleteDialog.DeleteTask
         return row;
     }
 
-    @Override
-    public void delete(int position) {
-        tasks.remove(position);
-    }
 
 
     static class DataHandler{

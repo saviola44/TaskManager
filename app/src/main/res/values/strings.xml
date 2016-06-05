@@ -15,4 +15,5 @@
     <string name="tasks_list_header">Lista Zadań</string>
     <string name="ending">"Koniec: "</string>
     <string name="ending_unknows">Koniec: nie określono</string>
+    <string name="deadline_label">Czas realizacji zadania</string>
 </resources>
