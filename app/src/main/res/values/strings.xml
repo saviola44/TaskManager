@@ -9,4 +9,6 @@
     <string name="title_label">Tytuł</string>
     <string name="load_icon">wczytaj ikonę</string>
     <string name="desciption_label">Opis</string>
+    <string name="title_alert">Tytuł nie moze byc pusty</string>
+    <string name="confirm_deletion">Czy napewno chcesz usunąć wybrane zadanie?</string>
 </resources>

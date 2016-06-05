@@ -1,27 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.saviola44.taskmanager.MainActivity">
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/add_btn"
+        android:text="@string/add_button_label"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
         <ListView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:id="@+id/task_list_id"
-            android:layout_alignParentTop="true">
+            android:layout_alignParentTop="true"
+            android:layout_above="@id/add_btn"
+            >
 
         </ListView>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/add_btn"
-            android:layout_below="@id/task_list_id"
-            android:text="@string/add_button_label"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true" />
 
-    </RelativeLayout>
-</ScrollView>
+</RelativeLayout>
