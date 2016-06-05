@@ -61,6 +61,10 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(intent, EditTaskActivity.EDIT_TASK);
             }
         });
+
+        ParseTaskJSON parse = new ParseTaskJSONImpl(getApplicationContext());
+        parse.writeTasks(tasks, "elo");
+        parse.readTask("elo");
     }
 
     @Override
