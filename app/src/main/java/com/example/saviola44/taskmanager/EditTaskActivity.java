@@ -187,7 +187,7 @@ public class EditTaskActivity extends AppCompatActivity implements DatePickerDia
         timeEnd.set(Calendar.HOUR_OF_DAY, hourOfDay);
         timeEnd.set(Calendar.MINUTE, minute);
         timeEnd.set(Calendar.SECOND, second);
-        SimpleDateFormat fromat = new SimpleDateFormat("yyyy:mm:dd hh:mm");
+        SimpleDateFormat fromat = new SimpleDateFormat("yyyy:MM:dd kk:mm");
         String timeStr = fromat.format(timeEnd.getTime());
         changeTimeEnd.setText(timeStr);
     }

@@ -15,6 +15,7 @@ import android.widget.TextView;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.LinkedList;
 
 import com.example.saviola44.taskmanager.Model.Task;
 
@@ -23,6 +24,7 @@ import com.example.saviola44.taskmanager.Model.Task;
  */
 public class TaskAdapter extends ArrayAdapter implements DeleteDialog.DeleteTask{
     ArrayList<Task> tasks;
+
     AppCompatActivity context;
     DeleteDialog dialog;
     public TaskAdapter(AppCompatActivity context, int resource, ArrayList<Task> tasks) {
@@ -63,7 +65,7 @@ public class TaskAdapter extends ArrayAdapter implements DeleteDialog.DeleteTask
             handler.taskIcon.setImageURI(Uri.parse(task.getUrl_to_icon()));
         }
         if(task.getTime_end()!=0){
-            SimpleDateFormat fromat = new SimpleDateFormat("yyyy:mm:dd hh:mm");
+            SimpleDateFormat fromat = new SimpleDateFormat("yyyy:MM:dd kk:mm");
             Calendar cal = Calendar.getInstance();
             cal.setTimeInMillis(task.getTime_end());
             handler.time_end.setText(fromat.format(cal.getTime()));

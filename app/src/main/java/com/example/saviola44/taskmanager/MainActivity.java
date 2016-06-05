@@ -11,15 +11,24 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.PriorityQueue;
+import java.util.Queue;
 
 import com.example.saviola44.taskmanager.Model.Task;
+import com.google.common.collect.Collections2;
 
 public class MainActivity extends AppCompatActivity {
     ListView taskList;
     Button addBtn;
     ArrayList<Task> tasks;
     TaskAdapter adapter;
+    public static int compTag = 1;
+    Comparator<Task> comparator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,8 +37,12 @@ public class MainActivity extends AppCompatActivity {
         Task.findById(Task.class, 1); //wywolanie aby ruszył SugarOrm do pracy po uruchomieniu
         taskList = (ListView) findViewById(R.id.task_list_id);
         addBtn = (Button) findViewById(R.id.add_btn);
+        if(compTag==1){
+            comparator = new TimeEndComparator();
+        }
         if(savedInstanceState!=null){
             tasks = savedInstanceState.getParcelableArrayList("tasks");
+
         }
         else {
             tasks = new ArrayList<>();
@@ -37,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
             for(int i=0; i<list.size(); i++){
                 tasks.add(list.get(i));
             }
+            Collections.sort(tasks, comparator);
         }
         adapter = new TaskAdapter(this, R.layout.task_row_layout, tasks);
         taskList.setAdapter(adapter);
@@ -62,9 +76,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        ParseTaskJSON parse = new ParseTaskJSONImpl(getApplicationContext());
-        parse.writeTasks(tasks, "elo");
-        parse.readTask("elo");
+        //ParseTaskJSON parse = new ParseTaskJSONImpl(getApplicationContext());
+        //parse.writeTasks(tasks, "elo");
+        //parse.readTask("elo");//zapisuje w bazie danych
     }
 
     @Override
@@ -76,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("elo", "jrdtem  " + task.getTitle());
 
                 tasks.add(task);
+                Collections.sort(tasks, comparator);
                 task.save();
                 adapter.notifyDataSetChanged();
             }
@@ -95,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
                     t.setTime_end(task.getTime_end());
                     t.setUrl_to_icon(task.getUrl_to_icon());
                     t.save();
+                    Collections.sort(tasks, comparator);
                     adapter.notifyDataSetChanged();
                 }
             }
