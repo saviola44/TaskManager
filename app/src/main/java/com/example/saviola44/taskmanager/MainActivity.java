@@ -1,6 +1,8 @@
 package com.example.saviola44.taskmanager;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,9 +26,16 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     Button addBtn;
     Spinner sortMethSpin;
     ArrayList<Task> tasks;
+    List<String> compStr = new ArrayList<>(); //spinner
     TaskAdapter adapter;
     public static int compTag = 1;
     Comparator<Task> comparator;
+    public static final String PREFS_NAME="taskmanagerprefs";
+    SharedPreferences prefs;
+
+    static {
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,9 +45,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         sortMethSpin = (Spinner) findViewById(R.id.sorted_comp_spinner);
         taskList = (ListView) findViewById(R.id.task_list_id);
         addBtn = (Button) findViewById(R.id.add_btn);
-        if(compTag==1){
-            comparator = new TimeEndComparator();
-        }
+
+        prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        compTag = prefs.getInt("sort", 0);
+        setComoparator();
+
         if(savedInstanceState!=null){
             tasks = savedInstanceState.getParcelableArrayList("tasks");
 
@@ -75,14 +86,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             }
         });
         sortMethSpin.setOnItemSelectedListener(this);
-        List<String> compStr = new ArrayList<>();
-        compStr.add("Koniec zadania");
-        compStr.add("Data utworzenia");
-        compStr.add("Tytuł");
+
+        compStr.add(getString(R.string.task_ending));
+        compStr.add(getString(R.string.task_creating));
+        compStr.add(getString(R.string.title_label));
         ArrayAdapter<String> spinAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, compStr);
         spinAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sortMethSpin.setAdapter(spinAdapter);
-
+        sortMethSpin.setSelection(compTag);
 
         //ParseTaskJSON parse = new ParseTaskJSONImpl(getApplicationContext());
         //parse.writeTasks(tasks, "elo");
@@ -104,7 +115,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 Task task = data.getParcelableExtra("task");
                 int pos = findPosById(task);
                 if(pos==-1){
-                    Toast.makeText(getApplicationContext(), "Wystąpił nieoczekiwany bład", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), R.string.unexpected_error_label, Toast.LENGTH_LONG).show();
                     return;
                 }
                 else{
@@ -141,7 +152,21 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-        switch(position){
+        compTag = position;
+        setComoparator();
+        Collections.sort(tasks, comparator);
+        prefs.edit().putInt("sort", position).commit();
+
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
+
+    void setComoparator(){
+        switch(compTag){
             case 0:{
                 comparator = new TimeEndComparator();
                 break;
@@ -155,12 +180,5 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 break;
             }
         }
-        Collections.sort(tasks, comparator);
-        adapter.notifyDataSetChanged();
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
     }
 }
