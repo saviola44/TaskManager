@@ -20,6 +20,7 @@
         android:layout_height="20dp"
         android:id="@+id/row_time_end"
         android:layout_alignParentTop="true"
+
         android:layout_toRightOf="@id/row_icon"/>
     <TextView
         android:layout_width="match_parent"

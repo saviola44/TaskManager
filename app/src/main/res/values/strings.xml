@@ -13,4 +13,6 @@
     <string name="confirm_deletion">Czy napewno chcesz usunąć wybrane zadanie?</string>
     <string name="sort_method_label">Sortuj wg:</string>
     <string name="tasks_list_header">Lista Zadań</string>
+    <string name="ending">"Koniec: "</string>
+    <string name="ending_unknows">Koniec: nie określono</string>
 </resources>

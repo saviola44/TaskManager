@@ -1,6 +1,5 @@
 package com.example.saviola44.taskmanager.Model;
 
-import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
 

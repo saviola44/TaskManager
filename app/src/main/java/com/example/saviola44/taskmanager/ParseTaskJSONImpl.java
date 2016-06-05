@@ -1,9 +1,6 @@
 package com.example.saviola44.taskmanager;
 
 import android.content.Context;
-import android.os.AsyncTask;
-import android.os.Environment;
-import android.util.Log;
 
 import com.example.saviola44.taskmanager.Model.Task;
 

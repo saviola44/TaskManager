@@ -15,7 +15,6 @@ import android.widget.TextView;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.LinkedList;
 
 import com.example.saviola44.taskmanager.Model.Task;
 
@@ -68,16 +67,15 @@ public class TaskAdapter extends ArrayAdapter implements DeleteDialog.DeleteTask
             SimpleDateFormat fromat = new SimpleDateFormat("yyyy:MM:dd kk:mm");
             Calendar cal = Calendar.getInstance();
             cal.setTimeInMillis(task.getTime_end());
-            handler.time_end.setText(fromat.format(cal.getTime()));
+            handler.time_end.setText(context.getString(R.string.ending) + fromat.format(cal.getTime()));
+        }
+        else{
+            handler.time_end.setText(R.string.ending_unknows);
         }
         handler.title.setText(task.getTitle());
         handler.deleteTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*Bundle bundle = new Bundle();
-                bundle.putInt("pos", position);
-                dialog.setArguments(bundle);
-                dialog.show(((AppCompatActivity)context).getSupportFragmentManager(), "DeleteTask");*/
                 showDialog(position);
             }
         });
